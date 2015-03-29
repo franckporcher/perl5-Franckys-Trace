@@ -35,7 +35,7 @@
    "provides" : {
       "Franckys::Trace" : {
          "file" : "lib/Franckys/Trace.pm",
-         "version" : "0.11"
+         "version" : "v0.11.0"
       }
    },
    "release_status" : "stable",
@@ -44,5 +44,5 @@
          "http://opensource.org/licenses/artistic-license-2.0.php"
       ]
    },
-   "version" : "0.11"
+   "version" : "v0.11"
 }

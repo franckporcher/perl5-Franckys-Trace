@@ -9,8 +9,9 @@
 #
 #      OPTIONS: 
 # REQUIREMENTS: Data::Dumper
+#               Perl6::Export::Attrs;
 #         BUGS: None so far
-#        NOTES: 
+#        NOTES: Developped for project: MUTINY Tahiti
 #
 #       AUTHOR: Franck Porcher, Ph.D. - franck.porcher@franckys.com
 # ORGANIZATION: Franckys
@@ -22,8 +23,7 @@
 # Tous droits réservés - All rights reserved
 #===============================================================================
 package Franckys::Trace;
-use version; our $VERSION = '0.11';           # Keep on same line
-use v5.16;                                    ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
+use v5.16;                                   ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
 use strict;
 use warnings;
 use autodie;
@@ -76,6 +76,12 @@ Trace - A simple trace mechanism
 =head1 VERSION
 
 Version 0.11
+
+=cut
+
+use version; our $VERSION = 'v0.11';           # Keep on same line
+
+=pod
 
 =head1 SYNOPSIS
 
@@ -566,24 +572,11 @@ __END__
 
 =back
 
-=head1 BUGS AND LIMITATIONS
-
-Please report any bug to C<franck.porcher(at)gmail.com>
-
-This module does not provide any mechanism for capturing and rethrowing errors arising
-from the client's foreign calls, so to keep the indentation correct under any
-situation.
-
-The same goes if the client forgets to undo a call by calling the proper B<&traceout()> at
-the last statement of the foreign function call.
 
 =head1 INCOMPATIBILITIES
 
 This code is guaranteed to work with Perl 5.14 or higher.
 
-=head1 SUPPORT
-
-C<franck.porcher(at)gmail.com>
 
 =head1 ACKNOWLEDGEMENTS
 
@@ -605,12 +598,20 @@ Instead, one would sing something like :
 
 and one were all done !
 
+
 =head1 AUTHOR
 
-L<Franck Porcher|mailto:franck.porcher@gmail.com>
+Franck PORCHER,PhD, C<< <franck.porcher at franckys.com> >>
 
 
 =head1 BUGS
+
+This module does not provide any mechanism for capturing and rethrowing errors arising
+from the client's foreign calls, so to keep the indentation correct under any
+situation.
+
+The same goes if the client forgets to undo a call by calling the proper B<&traceout()> at
+the last statement of the foreign function call.
 
 Please report any bugs or feature requests to C<bug-franckys-trace at rt.cpan.org>, or through
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Franckys-Trace>.  I will be notified, and then you'll
