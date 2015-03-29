@@ -1,0 +1,26 @@
+---
+abstract: 'A simple trace mechanism'
+author:
+  - 'Franck PORCHER,PhD <franck.porcher@franckys.com>'
+build_requires:
+  Test::More: '0'
+  Test::Output: '0'
+configure_requires:
+  Module::Build: '0'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4211, CPAN::Meta::Converter version 2.143240'
+license: artistic_2
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: Franckys-Trace
+provides:
+  Franckys::Trace:
+    file: lib/Franckys/Trace.pm
+    version: v0.11.0
+requires:
+  Data::Dumper: '0'
+  Perl6::Export::Attrs: '0'
+resources:
+  license: http://opensource.org/licenses/artistic-license-2.0.php
+version: v0.11

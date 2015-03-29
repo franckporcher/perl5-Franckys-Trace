@@ -1,0 +1,48 @@
+{
+   "abstract" : "A simple trace mechanism",
+   "author" : [
+      "Franck PORCHER,PhD <franck.porcher@franckys.com>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4211",
+   "license" : [
+      "artistic_2"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Franckys-Trace",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0",
+            "Test::Output" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Data::Dumper" : "0",
+            "Perl6::Export::Attrs" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Franckys::Trace" : {
+         "file" : "lib/Franckys/Trace.pm",
+         "version" : "v0.11.0"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://opensource.org/licenses/artistic-license-2.0.php"
+      ]
+   },
+   "version" : "v0.11"
+}

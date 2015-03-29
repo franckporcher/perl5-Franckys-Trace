@@ -1,0 +1,15 @@
+Build.PL
+Changes
+lib/Franckys/Trace.pm
+Makefile.PL
+MANIFEST			This list of files
+META.json
+META.yml
+README
+t/00-load.t
+t/01-trace-fact.t
+t/02-trace-hanoi.t
+t/03-trace-powerset.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
