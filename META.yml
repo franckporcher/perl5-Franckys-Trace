@@ -17,10 +17,10 @@ name: Franckys-Trace
 provides:
   Franckys::Trace:
     file: lib/Franckys/Trace.pm
-    version: v0.11.0
+    version: '0.11'
 requires:
   Data::Dumper: '0'
   Perl6::Export::Attrs: '0'
 resources:
   license: http://opensource.org/licenses/artistic-license-2.0.php
-version: v0.11
+version: '0.11'

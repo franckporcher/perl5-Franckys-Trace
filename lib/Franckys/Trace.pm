@@ -22,8 +22,8 @@
 # Tous droits réservés - All rights reserved
 #===============================================================================
 package Franckys::Trace;
-use version; our $VERSION = 'v0.11';           # Keep on same line
-use v5.20;                                     ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
+use version; our $VERSION = '0.11';           # Keep on same line
+use v5.16;                                    ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
 use strict;
 use warnings;
 use autodie;
