@@ -1,6 +1,6 @@
 #===============================================================================
 #
-#         FILE: Franckys::Trace
+#         FILE: Franckys/Trace.pm
 #
 #        USAGE: use Francky::Trace;
 #
@@ -33,11 +33,12 @@ use feature  qw( switch say unicode_strings );
 # UTF8 STUFF
 #----------------------------------------------------------------------------
 use utf8;
-use warnings            FATAL => "utf8";
+use warnings            FATAL => 'utf8';
 use charnames           qw( :full :short );
 use Encode              qw( encode decode );
 use Unicode::Collate;
 use Unicode::Normalize  qw( NFD NFC );
+
 
 #----------------------------------------------------------------------------
 # REQUIREMENTS
@@ -193,7 +194,7 @@ for tracing in and out complex call trees for debugging purposes.
 Please refer to the example above for a typical use of the module's main functions, namely 
 B<&tracein()> and B<&traceout()>.
 
-=head1 FUNCTIONS
+=head1 SUBROUTINES/METHODS
 
 =cut
 
@@ -201,7 +202,7 @@ B<&tracein()> and B<&traceout()>.
 # LIBRARY
 #----------------------------------------------------------------------------
 
-{ 
+{
     # Hidden state
     my $mode           = 0;
     my $margin_level   = 0;
@@ -220,7 +221,8 @@ Turn the trace mode on (Exported by default).
 =cut
 
     sub trace_on :Export(:DEFAULT) {
-        $pretty_trace  = $_[0] || 0;
+        my $flag = shift || 0;
+        $pretty_trace  = $flag;
         return $mode = 1;
     }
 
@@ -283,7 +285,8 @@ Reset the trace level to I<$margin_level> or 0 (Not exported by default).
 =cut
 
     sub reset_trace_level {
-        return $margin_level = $_[0] || 0;
+        my $ml = shift || 0;
+        return $margin_level = $ml;
     }
 
 
@@ -314,7 +317,7 @@ Returns the trace's margin before incrementing the margin level (Not exported by
 
 =cut
 
-    sub incr_trace_margin { 
+    sub incr_trace_margin {
         my $margin = trace_margin();
         $margin_level++;
         return $margin;
@@ -333,7 +336,7 @@ Returns the trace's margin after decrementing the margin level (Not exported by 
 
 =cut
 
-    sub decr_trace_margin { 
+    sub decr_trace_margin {
         $margin_level--;
         return trace_margin();
     }
@@ -426,7 +429,7 @@ sub tracein_aux {
                         s/^\$Arg1/sprintf('Arg%d', $i++)/e;
                         $_;
                     } @args;
-            say STDERR "${margin}$_" foreach @args; 
+            say STDERR "${margin}$_" foreach @args;
         }
         else {
             my $args_str = join ', ', map { s/^\$Arg\d+[[:space:]]*=[[:space:]]*(.*);$/$1/; $_ } Dumper(@_);
@@ -510,10 +513,10 @@ sub traceout_aux :Export(:DEFAULT){
         if ( pretty_trace_mode() ) {
             my $i = 1;
             my @res = @_;
-            @res = map { 
-                        $_ = Dumper($_); 
-                        s/^\$Res1[[:space:]]*=[[:space:]]*(.*);$/sprintf('Res%d = %s', $i++, $1)/e; 
-                        $_ 
+            @res = map {
+                        $_ = Dumper($_);
+                        s/^\$Res1[[:space:]]*=[[:space:]]*(.*);$/sprintf('Res%d = %s', $i++, $1)/e;
+                        $_
                    } @res;
 
             say STDERR "${margin}<-- ", shift(@res);
@@ -604,7 +607,15 @@ and one were all done !
 Franck PORCHER,PhD, C<< <franck.porcher at franckys.com> >>
 
 
-=head1 BUGS
+=head1 DIAGNOSTICS
+
+This modules runs successfully against Perl 5.14 to 5.20
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+This modules runs successfully under BSD unix, Linux, and Mac OS X (Native Perl)
+
+=head1 BUGS AND LIMITATIONS
 
 This module does not provide any mechanism for capturing and rethrowing errors arising
 from the client's foreign calls, so to keep the indentation correct under any
