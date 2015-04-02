@@ -23,7 +23,7 @@
 # Tous droits réservés - All rights reserved
 #===============================================================================
 package Franckys::Trace;
-use v5.16;                                   ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
+use 5.16.0;                                   ## no critic (ValuesAndExpressions::ProhibitVersionStrings)
 use strict;
 use warnings;
 use autodie;
@@ -76,11 +76,11 @@ Trace - A simple trace mechanism
 
 =head1 VERSION
 
-Version 0.11
+Version 0.1.1
 
 =cut
 
-use version; our $VERSION = 'v0.11';           # Keep on same line
+use version; our $VERSION = qv('0.1.1');           # Keep on same line
 
 =pod
 
