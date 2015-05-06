@@ -16,3 +16,8 @@ pod2htm*.tmp
 pm_to_blib
 Franckys-Trace-*
 Franckys-Trace-*.tar.gz
+.perltrace.config
+.perltrace.install
+.perltrace.midinstall
+.perltrace.postinstall
+.perltrace.submodules

@@ -1,3 +1,5 @@
+.perltrace.fetch
+.perltrace.preinstall
 Build.PL
 Changes
 lib/Franckys/Trace.pm

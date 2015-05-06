@@ -2,16 +2,16 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-  'VERSION_FROM' => 'lib/Franckys/Trace.pm',
   'PL_FILES' => {},
-  'EXE_FILES' => [],
+  'VERSION_FROM' => 'lib/Franckys/Trace.pm',
   'PREREQ_PM' => {
                    'Test::More' => 0,
-                   'Data::Dumper' => 0,
                    'Perl6::Export::Attrs' => 0,
+                   'Data::Dumper' => 0,
                    'Test::Output' => 0
                  },
   'INSTALLDIRS' => 'site',
+  'EXE_FILES' => [],
   'NAME' => 'Franckys::Trace'
 )
 ;
