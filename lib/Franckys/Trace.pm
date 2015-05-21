@@ -64,6 +64,8 @@ use Perl6::Export::Attrs;
 #----------------------------------------------------------------------------
 # CONSTANTS
 # GLOBALS
+my $trace_fd;
+my $trace_fn;
 
 #----------------------------------------------------------------------------
 # POD
@@ -214,14 +216,27 @@ B<&tracein()> and B<&traceout()>.
 #
 =pod
 
-=head2 trace_on( $pretty-print-flag );
+=head2 trace_on( [ $pretty-print-flag, [$filename] ] );
 
 Turn the trace mode on (Exported by default).
 
 =cut
 
     sub trace_on :Export(:DEFAULT) {
-        my $flag = shift || 0;
+        my ($flag, $filename) = @_;
+        $flag = 0 unless defined $flag;
+
+
+        if ( $filename ) {
+            open $trace_fd, '>', $filename
+                or return 0;
+            $trace_fn = $filename;
+        }
+        else {
+            no strict;
+            open $trace_fd, '>&', STDERR;
+        }
+
         $pretty_trace  = $flag;
         return $mode = 1;
     }
@@ -239,7 +254,11 @@ Turn the trace mode off (Exported by default).
 
 =cut
 
-    sub trace_off :Export(:DEFAULT) { return $mode = 0 }
+    sub trace_off :Export(:DEFAULT) { 
+        close $trace_fd if $trace_fn;
+
+        return $mode = 0 
+    }
 
 
 
@@ -417,7 +436,7 @@ sub tracein_aux {
         $Data::Dumper::Varname = 'Arg';
 
         if ( pretty_trace_mode() ) {
-            say STDERR "${margin}--> ${caller}()";
+            say $trace_fd "${margin}--> ${caller}()";
 
             # Trace-margin AFTER incrementation
             # Exactly what we need to align args ;)
@@ -429,11 +448,11 @@ sub tracein_aux {
                         s/^\$Arg1/sprintf('Arg%d', $i++)/e;
                         $_;
                     } @args;
-            say STDERR "${margin}$_" foreach @args;
+            say $trace_fd "${margin}$_" foreach @args;
         }
         else {
             my $args_str = join ', ', map { s/^\$Arg\d+[[:space:]]*=[[:space:]]*(.*);$/$1/; $_ } Dumper(@_);
-            say STDERR "${margin}--> ${caller}($args_str)";
+            say $trace_fd "${margin}--> ${caller}($args_str)";
         }
     }
 }
@@ -519,22 +538,22 @@ sub traceout_aux :Export(:DEFAULT){
                         $_
                    } @res;
 
-            say STDERR "${margin}<-- ", shift(@res);
-            say STDERR "${margin}    $_" foreach @res;
+            say $trace_fd "${margin}<-- ", shift(@res);
+            say $trace_fd "${margin}    $_" foreach @res;
         }
         else {
             my $res_str = join ', ', map { s/^\$Res\d+[[:space:]]*=[[:space:]]*(.*);$/$1/; $_ } Dumper(@_);
 
             if ( @_ > 1 ) {
-                say STDERR "${margin}<-- ($res_str)";
+                say $trace_fd "${margin}<-- ($res_str)";
             }
             else {
-                say STDERR "${margin}<-- $res_str";
+                say $trace_fd "${margin}<-- $res_str";
             }
         }
     }
     else {
-        say STDERR "${margin}<-- ()";
+        say $trace_fd "${margin}<-- ()";
     }
 }
 
@@ -556,7 +575,7 @@ sub trace :Export(:DEFAULT){
 
     my @comments = map { s/^\$C\d+[[:space:]]*=[[:space:]]*['"]?(.*?)['"]?;$/$1/; $_ } Dumper(@_);
 
-    say STDERR "${margin}$_" foreach @comments;
+    say $trace_fd "${margin}$_" foreach @comments;
 
 }
 
